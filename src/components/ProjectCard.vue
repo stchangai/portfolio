@@ -94,9 +94,13 @@ span img{
     width: 16px;
 }
 
-input:checked + span>img {
+input:hover + span>img {
     transform:scale(1.8);
 }
+
+/* input:checked + span>img {
+    transform:scale(2.3);
+} */
 
 .projectVideo{
     position:fixed;

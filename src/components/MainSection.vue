@@ -1,23 +1,51 @@
 <template>
     <div class="section" :id="title.toLowerCase()">
-        <h1>{{ title }}</h1>
+        <h1 v-if="title.toLowerCase() != 'accueil'">{{ title }}</h1>
+        <ThreejsAnimation v-if="title.toLowerCase() == 'accueil'" v-bind:getCommands.sync="getCommands" v-bind:rotation.sync="rotation"/>
+        <AccueilCommand v-show="getCommands" v-bind:rotation.sync="rotation"/>
         <ProjectsList v-if="title.toLowerCase() == 'projects'" />
-        <a v-if="nextpage != undefined" :href="'#'+nextpage"><img class="downArrowIcon" src="@/assets/icons/down_arrow.svg" alt="down arrow to swipe to the next section"><img class="downArrowIcon" src="@/assets/icons/down_arrow.svg" alt="down arrow to swipe to the next section"></a>
+        <a v-if="nextpage != undefined" :href="'#'+nextpage" v-on:click="OpenPortfolio" ><img class="downArrowIcon" src="@/assets/icons/down_arrow.svg" alt="down arrow to swipe to the next section"><img class="downArrowIcon" src="@/assets/icons/down_arrow.svg" alt="down arrow to swipe to the next section"></a>
     </div>
 </template>
 <script>
 import ProjectsList from "./ProjectsList.vue"
+import ThreejsAnimation from "./ThreejsAnimation.vue"
+import AccueilCommand from "./AccueilCommand.vue"
 export default{
     name : 'MainSection',
     components:{
-        ProjectsList
+        ProjectsList,
+        ThreejsAnimation,
+        AccueilCommand
     },
     props:{
         title :String,
         nextpage: String
     },
+    data(){
+        return{
+            getCommands : false,
+            rotation: 0
+        }
+    },
+    // watch:{
+    //     getCommands : function(boolValue){
+    //         if(boolValue){}
+    //     }
+    // },
+//     watch:{
+//     rotation:function(old, newVal){
+    
+//       console.log("mainsection rotation " + old + ", " + newVal )
+//     }
+//   },
+    methods:{
+        OpenPortfolio:function(){
+            document.documentElement.style.overflowY = "auto";
+        },
+    },
     mounted(){
-        console.log(this.nextpage)
+        //console.log(this.nextpage)
     },
 }
 </script>
@@ -67,4 +95,5 @@ a{
 .downArrowIcon + img {
     bottom: 4vh;
 }
+
 </style>

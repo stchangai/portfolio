@@ -13,7 +13,12 @@ export default {
   name: 'App',
   components: {
     MainSection
-  }
+  },
+  data(){
+    return{
+      IsPortfolioOpen : false
+    }
+  },
 }
 </script>
 
@@ -25,6 +30,9 @@ html, body {
   border: 0;
   font-size: 100%;
   scroll-behavior: smooth;
+}
+html{
+  overflow-y: hidden;
 }
 body{
   display:flex;
@@ -42,4 +50,5 @@ body{
   border: 0;
   width: 100%;
 }
+
 </style>
