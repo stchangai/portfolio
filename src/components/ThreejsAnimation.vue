@@ -26,23 +26,22 @@ export default {
       raycaster : null,
       pages : null,
       orbit : null,
-      bgScene : null,
       bgMesh : null,
     }
   },
   watch:{
-    rotation:function(){
-      if(this.rotation != 0){
-        console.log("threejsAnimation rotation")
-        this.orbit.target = new Three.Vector3(0,0,0); // set the center
-        this.orbit.maxPolarAngle =  Math.PI/2; // prevent the camera from going under the ground
-        this.orbit.minDistance = 100; // the minimum distance the camera must have from center
-        this.orbit.maxDistance = 150; // the maximum distance the camera must have from center
-        this.orbit.zoomSpeed = 0.3; // control the zoomIn and zoomOut speed
-        this.orbit.rotateSpeed = 0.3; // control the rotate speed
-        //this.orbit.autoRotate = true;
-        this.$emit("update:rotation", 0)
-      }
+    rotation:function(IsRotating){
+      
+        console.log("threejsAnimation rotation " + IsRotating)
+        // this.orbit.target = new Three.Vector3(0,0,0); // set the center
+        // this.orbit.maxPolarAngle =  Math.PI/2; // prevent the camera from going under the ground
+        // this.orbit.minDistance = 80; // the minimum distance the camera must have from center
+        // this.orbit.maxDistance = 150; // the maximum distance the camera must have from center
+        // this.orbit.zoomSpeed = 0.3; // control the zoomIn and zoomOut speed
+        // this.orbit.rotateSpeed = 0.3; // control the rotate speed
+        this.orbit.autoRotate = IsRotating == 1 ? true : false;
+        //this.$emit("update:rotation", IsRotating == 1 ? 0 : 1)
+      
       
 
       // this.camera.rotation.y += Math.PI/3 * newRotation;
@@ -58,10 +57,10 @@ export default {
       this.mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
       this.raycaster.setFromCamera(this.mouse, this.camera);
       var intersects = this.raycaster.intersectObjects(this.scene.children);
-      //console.log(intersects)
+      
       if (intersects.length > 0) {
         this.selectedObject = intersects[0];
-        //console.log(this.selectedObject.object.name);
+        console.log(this.selectedObject.object.name);
         if(this.pages.find(element => element == this.selectedObject.object.name)){ // maybe put the value selectedObject in a watch observator : when it changes of value then the cursor return to normal
           //console.log("#" + this.selectedObject.object.name)
           document.body.style.cursor = "pointer";
@@ -110,22 +109,21 @@ export default {
         this.scene = new Three.Scene();
 
         // LIGHT
-        var light = new Three.PointLight(0xffffff);
-        light.position.set(0,250,0);
-        this.scene.add(light);
+        // var light = new Three.PointLight(0xffffff);
+        // light.position.set(0,250,0);
+        // this.scene.add(light);
 
-        //this.scene.add(new Three.AxesHelper());
-        //const geometry = new Three.BoxGeometry(10, 10, 10);
+ 
         const geometry = new Three.SphereGeometry( 10, 32, 16 );
-        const material = new Three.MeshNormalMaterial({ opacity: 0.5, transparent: true});
+        const material = new Three.MeshNormalMaterial({ opacity: 0.95, transparent: true});
 
         
-        for ( let i = 0; i < 10; i ++ ) {
+        for ( let i = 0; i < 15; i ++ ) {
         
           const object = new Three.Mesh( geometry, material );
           object.position.x = Math.random() * 100 - 50;
           object.position.y = Math.random() * 80 - 40;
-          object.position.z = Math.random() * 80 - 40;
+          object.position.z = Math.random() * 100 - 50;
           object.rotation.x = Math.random() * 2 * Math.PI;
           object.rotation.y = Math.random() * 2 * Math.PI;
           object.rotation.z = Math.random() * 2 * Math.PI;
@@ -140,7 +138,7 @@ export default {
         
         const loader = new Three.TextureLoader();
         const texture = loader.load(
-          'https://r105.threejsfundamentals.org/threejs/resources/images/equirectangularmaps/tears_of_steel_bridge_2k.jpg',
+          require('@/assets/Nebula.png'),
         );
         texture.magFilter = Three.LinearFilter;
         texture.minFilter = Three.LinearFilter;
@@ -156,12 +154,22 @@ export default {
         materialSky.uniforms.tEquirect.value = texture;
         const plane = new Three.BoxGeometry(2, 2, 2);
         this.bgMesh = new Three.Mesh(plane, materialSky);
+        this.bgMesh.visible = false;
         this.scene.add(this.bgMesh);
         
 
         this.renderer = new Three.WebGLRenderer( { antialias: true } );
         this.renderer.setSize( window.innerWidth, window.innerHeight );
+
+        /**** ORBIT CAMERA */
         this.orbit = new OrbitControls(this.camera, this.renderer.domElement);
+        this.orbit.target = new Three.Vector3(0,0,0); // set the center
+        this.orbit.maxPolarAngle =  Math.PI/2; // prevent the camera from going under the ground
+        this.orbit.minDistance = 80; // the minimum distance the camera must have from center
+        this.orbit.maxDistance = 150; // the maximum distance the camera must have from center
+        this.orbit.zoomSpeed = 0.3; // control the zoomIn and zoomOut speed
+        this.orbit.rotateSpeed = 0.3; // control the rotate speed
+        this.orbit.autoRotate = true;
 
         container.appendChild( this.renderer.domElement );
         
@@ -183,7 +191,6 @@ export default {
 
         this.bgMesh.position.copy(this.camera.position);
         
-        this.renderer.render(this.bgScene, this.camera)
         this.renderer.render( this.scene, this.camera );
     }
   },

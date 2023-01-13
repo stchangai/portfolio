@@ -1,7 +1,7 @@
 <template>
     <div class="command">
-        <img class="arrowCommand" id="arrowCommandL"  src="@/assets/icons/down_arrow.svg" alt="left arrow to rotate around the three.js spheres" v-on:mouseover="Rotate(-1)"/>
-        <img class="arrowCommand" id="arrowCommandR" src="@/assets/icons/down_arrow.svg" alt="right arrow to rotate around the three.js spheres" v-on:click="Rotate(1)"/>
+        <img class="arrowCommand" id="arrowCommandL"  src="@/assets/icons/down_arrow.svg" alt="left arrow to rotate around the three.js spheres" v-on:click="Rotate()"/>
+        <img class="arrowCommand" id="arrowCommandR" src="@/assets/icons/down_arrow.svg" alt="right arrow to rotate around the three.js spheres" v-on:click="Rotate()"/>
     </div>
 </template>
 <script>
@@ -13,13 +13,18 @@ export default{
     },
     data(){
         return{
-
+            IsRotating : 0
         }
     },
     methods:{
-        Rotate: function(direction){
-            console.log("rotate "+ direction)
-            this.$emit("update:rotation", direction)
+        Rotate: function(){
+            this.IsRotating == 0 ? this.IsRotating = 1 : this.IsRotating = 0
+            console.log("rotate " + this.IsRotating)
+            // if(this.IsRotating == 0){console.log("hello");this.IsRotating = 1}
+            // else{
+            //     console.log('bye');this.IsRotating = 0;
+            // }
+            this.$emit("update:rotation", this.IsRotating)
         }
     }
 }

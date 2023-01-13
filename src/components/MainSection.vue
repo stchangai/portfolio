@@ -25,7 +25,7 @@ export default{
     data(){
         return{
             getCommands : false,
-            rotation: 0
+            rotation: 1
         }
     },
     // watch:{
