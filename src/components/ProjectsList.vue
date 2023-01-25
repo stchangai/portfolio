@@ -39,7 +39,7 @@ export default{
 .list{
     width:86%;
     height:fit-content;
-    margin:0 7% 0 10%;
+    margin:0 7% 3vh 10%;
 
     display:flex;
     flex-wrap: wrap;

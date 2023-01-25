@@ -1,5 +1,5 @@
 <template>
-  <div class="threejs" id="container">
+  <div id="container">
 
   </div>
 </template>
@@ -78,16 +78,16 @@ export default {
           this.camera.position.z = 0.2
         }
 
-        if(this.camera.position.z >= 150){
-          this.camera.position.z = 149
+        if(this.camera.position.z >= 120){
+          this.camera.position.z = 119
         }
 
-        if(this.camera.position.z > 140){
+        // if(this.camera.position.z > 140){
 
-          this.$emit("update:getCommands", true)
-        }else{
-          this.$emit("update:getCommands", false)
-        }
+        //   this.$emit("update:getCommands", true)
+        // }else{
+        //   this.$emit("update:getCommands", false)
+        // }
 
     },
     onResize: function(){
@@ -103,8 +103,8 @@ export default {
     init: function() {
         let container = document.getElementById('container');
 
-        this.camera = new Three.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 500 );
-        this.camera.position.z = 80;
+        this.camera = new Three.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 500);
+        this.camera.position.z = 150;
 
         this.scene = new Three.Scene();
 
@@ -166,7 +166,7 @@ export default {
         this.orbit.target = new Three.Vector3(0,0,0); // set the center
         this.orbit.maxPolarAngle =  Math.PI/2; // prevent the camera from going under the ground
         this.orbit.minDistance = 80; // the minimum distance the camera must have from center
-        this.orbit.maxDistance = 150; // the maximum distance the camera must have from center
+        this.orbit.maxDistance = 120; // the maximum distance the camera must have from center
         this.orbit.zoomSpeed = 0.3; // control the zoomIn and zoomOut speed
         this.orbit.rotateSpeed = 0.3; // control the rotate speed
         this.orbit.autoRotate = true;
