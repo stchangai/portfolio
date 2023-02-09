@@ -1,5 +1,5 @@
 <template>
-    <div class="skills" v-on:mouseenter="TimerSkills()"> 
+    <div class="skills"> 
         <div class="skill">
             <span class="skillIntro">En développement web, j'aime travailler avec et aimerais devenir une experte de ...</span>
             <!-- <h2 :style="{animationDelay: 2  * index + 's', animationDuration: 1.5 * (skills['dev'].length - index) + 's'}" class="rotatingText-adjective" v-for="(skilldev, index) in skills['dev']" :key="index">{{ skilldev }}</h2> -->
@@ -17,30 +17,6 @@
                 <li v-for="(skill, index) in skills['proj']" :key="index">{{ skill }}</li>
             </ul>
         </div>
-        <!-- <div class="skillsContainer">
-            <div id="skillsTable">
-                <div class="skillContainer" id="skill1" v-on:mouseenter="SkillsAppearing('dev')" v-on:mouseleave="SkillsDisappearing()">
-                    <h3 v-show="skillsVisible[0]">Développement web</h3>
-                    <ul class="skills">
-                            <li :style="{opacity :randomPositions[0][index][2],  top: randomPositions[0][index][0] + '%', left: randomPositions[0][index][1] + '%',transition: 'top 1s ease, left 1.5s ease, opacity 3s ease' }" class="skill" v-for="(skill, index) in skills['dev']" :key="index">{{skill}}</li>
-                    </ul>
-                </div>
-
-                <div class="skillContainer" id="skill2" v-on:mouseenter="SkillsAppearing('proj')" v-on:mouseleave="SkillsDisappearing()">
-                    <h3 v-show="skillsVisible[1]">Gestion de Projet</h3>
-                    <ul v-show="showSkills && indexSkill == 1" class="skills">
-                        <li :style="{top: randomPositions[1][index][0] + '%', left: randomPositions[1][index][1] + '%'}" class="skill" v-for="(skill, index) in skills['proj']" :key="index">{{skill}}</li>
-                    </ul>
-                </div>
-
-                <div class="skillContainer" id="skill3" v-on:mouseenter="SkillsAppearing('prog')" v-on:mouseleave="SkillsDisappearing()">
-                    <h3 v-show="skillsVisible[2]">Programmation</h3>
-                    <ul v-show="showSkills && indexSkill == 2" class="skills">
-                        <li :style="{top: randomPositions[2][index][0] + '%', left: randomPositions[2][index][1] + '%'}" class="skill" v-for="(skill, index) in skills['prog']" :key="index">{{skill}}</li>
-                    </ul>
-                </div>
-            </div>
-        </div> -->
         <img class="background" src="@/assets/bg.png" alt="background">
     </div>
   </template>
@@ -66,28 +42,10 @@
         this.counterProg = this.skills['prog'].length;
         this.counterProj = this.skills['proj'].length
     },
+    mounted(){
+        this.TimerSkills();
+    },
     methods:{
-        MakeOtherSkillsInvisible: function(index){
-            this.skillsVisible = [false, false, false]
-            this.skillsVisible[index] = true
-        }, 
-        SkillsAppearing : function(categorie){
-            
-            console.log(this.skills[categorie][0])
-            let convertTab=["dev", 'proj', 'prog'];
-            this.indexSkill = convertTab.findIndex(element => element == categorie);
-            this.MakeOtherSkillsInvisible(this.indexSkill)
-            this.showSkills = true;
-            this.randomPositions = [[[-250, 10, 1], [0,-100, 1], [150,100, 1],[-200,-35, 1], [-180,80, 1], [220,-70, 1]], [[150,100, 1],[-200,-35, 1]], [[-250, 10, 1], [0,-100, 1], [150,100, 1]]];
-
-        },
-        SkillsDisappearing : function(){
-            // this.index = null;
-            // this.showSkills = false;
-            // this.skillsVisible = [true, true, true]
-            //this.randomPositions = [[[0,0,0], [0,0,0], [0,0,0],[0,0,0], [0,0,0], [0,0,0]], [[0,0,0],[0,0,0]], [[0,0,0], [0,0,0], [0,0,0]]];
-
-        },
         timerDev : function(){
             if (this.counter >= 0) {
                     setTimeout(() => {
@@ -129,6 +87,9 @@
     align-items: center;
     justify-content: center;
     margin: 0 2vw;
+
+    position: relative;
+    z-index: 10;
 }
 
 .skill:first-child{
@@ -193,108 +154,4 @@
   }
 }
 
-/*
-p, li{
-    font-size: 1rem;
-    width: 65vw;
-    margin-left: 5vw;
-    
-}
-h2{
-    margin: 1vh 10vw;
-    font-size: 5rem;
-}
-
-h3{
-    margin:1vh 1vw;
-    font-size: 2rem;
-    background-color: black;
-}
-
-ul{
-    margin:1vh 1vw;
-    list-style: none;
-}
-
-.aProposDeMoi{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    height: 100vh;
-    justify-content: flex-start;
-    width: 100vw;
-    margin-top:5vh;
-
-}
-.skillsContainer{
-    height: 100%;
-    width:100%;
-}
-
-.skillsContainer li{
-    text-transform: uppercase;
-}
-
-#skillsTable{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-areas: 
-    "skill2 . ."
-    ". skill1 ."
-    ". . skill3";
-    justify-items: center;
-    align-items: center;
-    height:100%;
-    width: 100%;
-}
-
-#skill1{
-    grid-area: skill1;
-}
-
-#skill2{
-    grid-area: skill2;
-}
-
-#skill3{
-    grid-area: skill3;
-}
-
-.skillContainer{
-    position:relative;
-}
-.aProposDeMoi div{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 1vh 2vw;
-    text-align: justify;
-}
-
-.skills{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-}
-.skill{
-    position:absolute;
-    top:0;
-    left:0;
-    z-index: 10;
-    opacity:0;
-    transition: top 2s ease, left 2.5s ease, opacity 2s ease 3s;
-}
-
-
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease;
-}
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-*/
   </style>

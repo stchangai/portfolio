@@ -22,10 +22,6 @@
     data(){
         return{
             skills:{'dev' : ["VueJS","NuxtJS", "Javascript", "SQL", "ThreeJS", "NodeJS"], 'proj' : ["git (Github)", "AGILE"], 'prog' : ["Python", "C++", "OpenGL"]}, //, "Javascript", "SQL", "ThreeJS", "NodeJS"], ["git (Github)", "AGILE"],["Python", "C++", "OpenGL"]],
-            indexSkill : null,
-            showSkills : false,
-            randomPositions:[[[0,0,0,0], [0,0,0,0], [0,0,0,0],[0,0,0,0], [0,0,0], [0,0,0]], [[0,0,0],[0,0,0]], [[0,0,0], [0,0,0], [0,0,0]]],
-            skillsVisible : [true, true, true],
             presentationSplitInArray : "",
             presentationMailLetterArray : "",
             timer : 0,
@@ -46,27 +42,6 @@
             // let presentation = "Salut! Je suis Solem Tchangaï, une ingénieure passionnée par le développement web. Les frameworks Javascript c'est mon dada. J'aime travailler en équipe et je suis toujours à l'écoute pour aider les autres. N'hésitez pas à me contacter si vous avez des questions ou si vous voulez discuter d'un projet ensemble!"
             return string.split(separateur);
         },
-        MakeOtherSkillsInvisible: function(index){
-            this.skillsVisible = [false, false, false]
-            this.skillsVisible[index] = true
-        }, 
-        SkillsAppearing : function(categorie){
-            
-            console.log(this.skills[categorie][0])
-            let convertTab=["dev", 'proj', 'prog'];
-            this.indexSkill = convertTab.findIndex(element => element == categorie);
-            this.MakeOtherSkillsInvisible(this.indexSkill)
-            this.showSkills = true;
-            this.randomPositions = [[[-250, 10, 1], [0,-100, 1], [150,100, 1],[-200,-35, 1], [-180,80, 1], [220,-70, 1]], [[150,100, 1],[-200,-35, 1]], [[-250, 10, 1], [0,-100, 1], [150,100, 1]]];
-
-        },
-        SkillsDisappearing : function(){
-            // this.index = null;
-            // this.showSkills = false;
-            // this.skillsVisible = [true, true, true]
-            //this.randomPositions = [[[0,0,0], [0,0,0], [0,0,0],[0,0,0], [0,0,0], [0,0,0]], [[0,0,0],[0,0,0]], [[0,0,0], [0,0,0], [0,0,0]]];
-
-        }
     }
   }
   </script>

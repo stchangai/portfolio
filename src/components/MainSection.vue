@@ -42,24 +42,10 @@ export default{
             rotation: 1
         }
     },
-    // watch:{
-    //     getCommands : function(boolValue){
-    //         if(boolValue){}
-    //     }
-    // },
-//     watch:{
-//     rotation:function(old, newVal){
-    
-//       console.log("mainsection rotation " + old + ", " + newVal )
-//     }
-//   },
     methods:{
         OpenPortfolio:function(){
             document.documentElement.style.overflowY = "auto";
         },
-    },
-    mounted(){
-        //console.log(this.nextpage)
     },
 }
 </script>
