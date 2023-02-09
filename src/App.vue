@@ -76,7 +76,7 @@ body{
   .list{
     column-gap: 5vw;
   }
-  .threejs {
+  #app .threejs {
     margin-left: 0%;
   }
   .skillName{
@@ -94,6 +94,10 @@ body{
     animation:none;
     opacity:1;
   }
+  #competences h1{
+    font-size: 1.6em;
+    margin-top: 5vh;
+  }
 }
 
 @media screen and (max-width: 600px){
@@ -109,7 +113,7 @@ body{
   #app .presentation{
     font-size: 1.1rem;
   }
-  .animationText > div{
+  #app .animationText > div{
     height:55%;
   }
   #app .projectCard{
@@ -149,10 +153,10 @@ body{
   #app .presentation{
     font-size: 1rem;
   }
-  .animationText > div{
+  #app .animationText > div{
     height: 62%;
   }
-  .animationText > div.text-top-top{
+  #app .animationText > div.text-top-top{
     height: 35%;
   }
   #app .under{

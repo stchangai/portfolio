@@ -85,8 +85,8 @@ export default{
 #competences{
     display:flex;
     /* justify-content: space-between; */
-    align-items: center;
-}
+    /* align-items: center; */
+}   
 
 #apropos{
     position:relative;

@@ -32,6 +32,9 @@
     created: function() {
 		
 	},
+    mounted(){
+        this.createSpan();
+    },
     methods:{
         createSpan: function(){
             console.log("hello de APropos")
@@ -115,6 +118,9 @@ ul{
     display:flex;
     flex-wrap: wrap;
     justify-content: right;
+
+    position: relative;
+    z-index: 10;
 }
 @keyframes AnimatedPresentation{
   0% { transform: translate3d(0, 50%, 0);
