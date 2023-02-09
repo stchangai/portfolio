@@ -63,7 +63,7 @@ export default{
     background-color : black;
     font-size: 5rem;
     font-family: 'BigJohn','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color:white;
+    color:rgb(230, 224, 224);
     
     margin: 0;
     padding: 0;

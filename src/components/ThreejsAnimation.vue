@@ -144,6 +144,7 @@ export default {
         texture.minFilter = Three.LinearFilter;
 
         const shader = Three.ShaderLib.equirect;
+        const materialBG = new Three.MeshNormalMaterial({color: 0x020202 })
         const materialSky = new Three.ShaderMaterial({
           fragmentShader: shader.fragmentShader,
           vertexShader: shader.vertexShader,
@@ -153,7 +154,7 @@ export default {
         });
         materialSky.uniforms.tEquirect.value = texture;
         const plane = new Three.BoxGeometry(2, 2, 2);
-        this.bgMesh = new Three.Mesh(plane, materialSky);
+        this.bgMesh = new Three.Mesh(plane, materialBG);
         this.bgMesh.visible = false;
         this.scene.add(this.bgMesh);
         
