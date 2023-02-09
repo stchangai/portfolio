@@ -1,14 +1,16 @@
 <template>
     <div class="projectCard" :style="{background: 'no-repeat center url('+ image +')'}">
         <h1>{{ title }}</h1>
-        <p class="projectDescription">{{ description }}</p>
+        <p class="projectSousTitre">{{ sousTitre }}</p>
         <label class="playVideo">
             <input v-model="PlayIsClicked" type="checkbox">
             <span class="iconPlay"><img src="@/assets/icons/play.svg" alt="icon video play"></span>
         </label>
         
         <div class="projectVideo" v-if="PlayIsClicked && video != 'undefined'" v-on:click="VideoOut">
+            <h2 class="projectTitle">{{ title }}</h2>
             <video :class="{active : PlayIsClicked}" :poster="image" autoplay="true" preload="none" :src="video" controls="controls"></video>
+            <span class="projectDescription">{{ description }}</span>
         </div>
         
     </div>
@@ -20,7 +22,8 @@ export default{
         title :String,
         image : String,
         description : String,
-        video : String
+        video : String,
+        sousTitre : String,
     },
     data(){
         return{
@@ -59,7 +62,7 @@ h1{
     margin-bottom: 0;
 }
 
-.projectDescription{
+.projectSousTitre{
     font-size: 0.5rem;
     font-weight: 0;
 }
@@ -110,19 +113,28 @@ input:hover + span>img {
     height:100vh;
     width:100vw;
     transition : height 2s, width 2s;
-    background : rgba(0, 0, 0, 0.61);
+    background : rgba(0, 0, 0, 0.91);
 
     display: flex;
     justify-content: center;
     align-items: center;
-
+    flex-direction: column;
 
 }
 
+.projectTitle{
+    font-size: 3rem;
+}
+
+.projectDescription{
+    font-size: 1rem;
+    font-family: 'Questrial';
+}
 video{
     height:0;
     width:0;
     transition:height 2s, width 2s;
+    margin-bottom: 5vh;
 }
 
 .active{
